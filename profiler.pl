@@ -27,24 +27,15 @@ while(1) {
 
     print $fh "\n";
     print "*";
-    sleep 1;
 } 
 
 
 
 
 sub getcpu() {
-    my $line=`top -b -n 1 | head | grep Cpu`;
-    my $used;
-    if($line=~/ (\S+?) id/s) {
-	my $idle=$1;
-	$used=100-$idle;
-    }
-    else {
-	return "-1";
-    }
-    return $used;
-
+    my $percentage=`sh getcpu.sh`;
+    chomp $percentage;
+    return $percentage;
 }
 
 
